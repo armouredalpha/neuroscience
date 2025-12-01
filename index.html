@@ -1080,3 +1080,20 @@ Delta: 10.2 | Theta: 8.4 | Alpha: 14.1 | Beta: 29.5 | Gamma: 3.0
     Congratulations! Your device is now reading brainwaves  
     and detecting your <b>emotional state in real-time</b> 🔮🧠✨
 </p>
+
+ <script>
+  function copyCode(button) {
+    const codeBox = button.nextElementSibling;
+    const code = codeBox.innerText;
+
+    navigator.clipboard.writeText(code).then(() => {
+      button.innerText = "Copied!";
+      setTimeout(() => {
+        button.innerText = "Copy";
+      }, 2000);
+    }).catch(err => {
+      console.error('Failed to copy text: ', err);
+    });
+  }
+</script>
+
