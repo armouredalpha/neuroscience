@@ -377,6 +377,246 @@ float EMGFilter(float input)
     Flex your muscles → envelope rises → servo toggles.  
     Stronger flex = higher EMG = faster servo movement.
 </p>
+
+ <!-- ===================== PROJECT 3 — MINDSCOPE (DARK MODE) ===================== -->
+
+<div class="section-card">
+    <h2>Project 3: MindScope 🔮 → Detecting Emotions Using EEG + GROK API</h2>
+
+    <p>
+        In this project, you will record EEG signals using the <b>BioAmp EXG Pill</b>  
+        and an <b>ESP32 Dev Board</b>, extract brainwave bandpowers using FFT,  
+        and classify emotional states like <b>Focused, Calm, Drowsy, Daydreaming, Hyper-aware</b>.  
+        The output appears live in the <b>Serial Monitor</b>.
+    </p>
+
+    <h3>🧰 Hardware Required</h3>
+    <ul>
+        <li>ESP32 Dev Board</li>
+        <li>BioAmp EXG Pill</li>
+        <li>BioAmp Cable v3</li>
+        <li>3 × Gel Electrodes</li>
+        <li>3 × Jumper Cables</li>
+        <li>NuPrep Skin Preparation Gel</li>
+        <li>Wet Wipe</li>
+        <li>Brain BioAmp Band (optional)</li>
+        <li>Electrode Gel (if using Brain BioAmp Band)</li>
+    </ul>
+
+    <h3>💻 Software Required</h3>
+    <ul>
+        <li>Arduino IDE</li>
+    </ul>
+
+    <h3>🔌 Circuit Diagram</h3>
+    <img src="https://content.instructables.com/F15/XHD3/M98IG675/F15XHD3M98IG675.png"
+         alt="Circuit diagram showing EEG setup">
+
+    <h3>📍 Electrode Placement</h3>
+    <img src="https://content.instructables.com/FGF/1Q7B/M98IG66R/FGF1Q7BM98IG66R.png"
+         alt="Electrode placement diagram">
+
+    <p style="text-align:center; max-width:800px; margin:15px auto;">
+        Apply <b>NuPrep Gel</b>, clean with a wet wipe, and place electrodes  
+        according to the diagram. Ensure firm contact for the best EEG signal.
+    </p>
+</div>
+
+<!-- ===================== STEP 1 — UPLOAD CODE ===================== -->
+
+<h3 class="step-title">🧪 Step 1: Upload the EEG Emotion Detection Program</h3>
+
+<p class="step-text">
+    Create a new sketch in Arduino IDE and paste the following code:
+</p>
+
+<div class="code-box">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<pre><code>
+#include <arduinoFFT.h>
+
+// ================= EEG + FFT Config =====================
+#define SAMPLE_RATE 512
+#define FFT_SIZE 256
+#define BAUD_RATE 115200
+#define INPUT_PIN A0
+#define LED_PIN 2
+
+// ================= Frequency Bands ======================
+#define DELTA_LOW 0.5
+#define DELTA_HIGH 4.0
+#define THETA_LOW 4.0
+#define THETA_HIGH 8.0
+#define ALPHA_LOW 8.0
+#define ALPHA_HIGH 13.0
+#define BETA_LOW 13.0
+#define BETA_HIGH 30.0
+#define GAMMA_LOW 30.0
+#define GAMMA_HIGH 45.0
+
+// Less smoothing → responds faster
+#define SMOOTHING_FACTOR 0.35
+const float EPSILON = 1e-6f;
+
+// ================= Structs ==============================
+typedef struct {
+  float delta, theta, alpha, beta, gamma, total;
+} BandpowerResults;
+
+typedef struct {
+  float delta = 0, theta = 0, alpha = 0, beta = 0, gamma = 0, total = 0;
+} SmoothedBandpower;
+
+SmoothedBandpower smoothedPowers;
+
+// ================= FFT Buffers ==========================
+double vReal[FFT_SIZE];
+double vImag[FFT_SIZE];
+ArduinoFFT<double> FFT(vReal, vImag, FFT_SIZE, SAMPLE_RATE);
+
+// ================= Timing ================================
+unsigned long lastEmotionTime = 0;
+unsigned long sampling_period_us;
+
+// ================= Functions =============================
+void smoothBandpower(BandpowerResults *raw, SmoothedBandpower *s) {
+  s->delta = SMOOTHING_FACTOR * raw->delta + (1 - SMOOTHING_FACTOR) * s->delta;
+  s->theta = SMOOTHING_FACTOR * raw->theta + (1 - SMOOTHING_FACTOR) * s->theta;
+  s->alpha = SMOOTHING_FACTOR * raw->alpha + (1 - SMOOTHING_FACTOR) * s->alpha;
+  s->beta  = SMOOTHING_FACTOR * raw->beta  + (1 - SMOOTHING_FACTOR) * s->beta;
+  s->gamma = SMOOTHING_FACTOR * raw->gamma + (1 - SMOOTHING_FACTOR) * s->gamma;
+  s->total = SMOOTHING_FACTOR * raw->total + (1 - SMOOTHING_FACTOR) * s->total;
+}
+
+BandpowerResults calculateBandpower(double *powerSpectrum, double binWidth) {
+  BandpowerResults results = {0};
+
+  for (int i = 1; i < FFT_SIZE / 2; i++) {
+    float freq = i * binWidth;
+    float power = powerSpectrum[i];
+    results.total += power;
+
+    if (freq >= DELTA_LOW && freq < DELTA_HIGH) results.delta += power;
+    else if (freq >= THETA_LOW && freq < THETA_HIGH) results.theta += power;
+    else if (freq >= ALPHA_LOW && freq < ALPHA_HIGH) results.alpha += power;
+    else if (freq >= BETA_LOW  && freq < BETA_HIGH)  results.beta  += power;
+    else if (freq >= GAMMA_LOW && freq < GAMMA_HIGH) results.gamma += power;
+  }
+  return results;
+}
+
+// ================= Emotion Classification ==================
+void printEmotion() {
+  float d = (smoothedPowers.delta / (smoothedPowers.total + EPSILON)) * 100;
+  float t = (smoothedPowers.theta / (smoothedPowers.total + EPSILON)) * 100;
+  float a = (smoothedPowers.alpha / (smoothedPowers.total + EPSILON)) * 100;
+  float b = (smoothedPowers.beta  / (smoothedPowers.total + EPSILON)) * 100;
+  float g = (smoothedPowers.gamma / (smoothedPowers.total + EPSILON)) * 100;
+
+  String emotion = "Neutral";
+
+  // Very low signal → no contact
+  if (smoothedPowers.total < 0.001) {
+    emotion = "No Signal";
+  }
+  else if (d > 60 && b < 10 && g < 10) {
+    emotion = "Drowsy";
+  }
+  else if (t > a && t > b && t > 15) {
+    emotion = "Daydreaming";
+  }
+  else if (b > 25 && b > a) {
+    emotion = "Focused";
+  }
+  else if (a > 25 && a > b) {
+    emotion = "Calm";
+  }
+  else if (g > 15) {
+    emotion = "Hyper-aware";
+  }
+
+  Serial.print("Emotion: "); Serial.println(emotion);
+  Serial.print("Delta: "); Serial.print(d, 1);
+  Serial.print(" | Theta: "); Serial.print(t, 1);
+  Serial.print(" | Alpha: "); Serial.print(a, 1);
+  Serial.print(" | Beta: ");  Serial.print(b, 1);
+  Serial.print(" | Gamma: "); Serial.println(g, 1);
+}
+
+// ================= Setup ==================
+void setup() {
+  Serial.begin(115200);
+  pinMode(INPUT_PIN, INPUT);
+  pinMode(LED_PIN, OUTPUT);
+
+  sampling_period_us = round(1000000 * (1.0 / SAMPLE_RATE));
+
+  Serial.println("EEG Emotion Detection (Improved) Started...");
+}
+
+// ================= Loop ==================
+void loop() {
+  unsigned long microseconds;
+
+  // Sampling
+  for (int i = 0; i < FFT_SIZE; i++) {
+    microseconds = micros();
+    vReal[i] = analogRead(INPUT_PIN);
+    vImag[i] = 0;
+    while (micros() - microseconds < sampling_period_us);
+  }
+
+  // FFT Processing
+  FFT.windowing(FFT_WIN_TYP_HAMMING, FFT_FORWARD);
+  FFT.compute(FFT_FORWARD);
+  FFT.complexToMagnitude();
+
+  double binWidth = (1.0 * SAMPLE_RATE) / FFT_SIZE;
+
+  BandpowerResults raw = calculateBandpower(vReal, binWidth);
+  smoothBandpower(&raw, &smoothedPowers);
+
+  // LED = "Focus indicator" (simple)
+  double b_pct = (smoothedPowers.beta / (smoothedPowers.total + EPSILON)) * 100;
+  digitalWrite(LED_PIN, (b_pct > 20.0 ? HIGH : LOW));
+
+  // Print emotion every 5 sec
+  if (millis() - lastEmotionTime > 5000) {
+    printEmotion();
+    lastEmotionTime = millis();
+  }
+}
+</code></pre>
+</div>
+
+<!-- ===================== STEP 2 — RESULTS ===================== -->
+
+<h3 class="step-title">📊 Step 2: View Your Emotions Live</h3>
+
+<p class="step-text">
+    Open <b>Tools → Serial Monitor</b> in Arduino IDE and set the baud rate to <b>115200</b>.
+</p>
+
+<p class="step-text">You will see outputs like:</p>
+
+<div style="
+    background:#050505;
+    color:#00ff99;
+    padding:18px;
+    border-radius:14px;
+    font-family:monospace;
+    font-size:14px;
+    max-width:700px;
+    margin:20px auto;
+    border:1px solid #00ffdd;
+    box-shadow:0 0 16px rgba(0,255,230,0.5);
+">
+Emotion: Calm<br>
+Delta: 12.3 | Theta: 18.4 | Alpha: 32.1 | Beta: 10.5 | Gamma: 2.1<br><br>
+Emotion: Focused<br>
+Delta: 10.2 | Theta: 8.4 | Alpha: 14.1 | Beta: 29.5 | Gamma: 3.0
+</div>
+
 <!-- ===================== PROJECT 2 — BLINK-A-SAUR (DARK MODE) ===================== -->
 
 <div class="section-card">
@@ -837,244 +1077,6 @@ void loop() {
     and trigger a <b>Space bar press</b> each time.  
     Try different blink intensities to find your sweet spot 😎👁️🦖
 </p>
-<!-- ===================== PROJECT 3 — MINDSCOPE (DARK MODE) ===================== -->
-
-<div class="section-card">
-    <h2>Project 3: MindScope 🔮 → Detecting Emotions Using EEG + GROK API</h2>
-
-    <p>
-        In this project, you will record EEG signals using the <b>BioAmp EXG Pill</b>  
-        and an <b>ESP32 Dev Board</b>, extract brainwave bandpowers using FFT,  
-        and classify emotional states like <b>Focused, Calm, Drowsy, Daydreaming, Hyper-aware</b>.  
-        The output appears live in the <b>Serial Monitor</b>.
-    </p>
-
-    <h3>🧰 Hardware Required</h3>
-    <ul>
-        <li>ESP32 Dev Board</li>
-        <li>BioAmp EXG Pill</li>
-        <li>BioAmp Cable v3</li>
-        <li>3 × Gel Electrodes</li>
-        <li>3 × Jumper Cables</li>
-        <li>NuPrep Skin Preparation Gel</li>
-        <li>Wet Wipe</li>
-        <li>Brain BioAmp Band (optional)</li>
-        <li>Electrode Gel (if using Brain BioAmp Band)</li>
-    </ul>
-
-    <h3>💻 Software Required</h3>
-    <ul>
-        <li>Arduino IDE</li>
-    </ul>
-
-    <h3>🔌 Circuit Diagram</h3>
-    <img src="https://content.instructables.com/F15/XHD3/M98IG675/F15XHD3M98IG675.png"
-         alt="Circuit diagram showing EEG setup">
-
-    <h3>📍 Electrode Placement</h3>
-    <img src="https://content.instructables.com/FGF/1Q7B/M98IG66R/FGF1Q7BM98IG66R.png"
-         alt="Electrode placement diagram">
-
-    <p style="text-align:center; max-width:800px; margin:15px auto;">
-        Apply <b>NuPrep Gel</b>, clean with a wet wipe, and place electrodes  
-        according to the diagram. Ensure firm contact for the best EEG signal.
-    </p>
-</div>
-
-<!-- ===================== STEP 1 — UPLOAD CODE ===================== -->
-
-<h3 class="step-title">🧪 Step 1: Upload the EEG Emotion Detection Program</h3>
-
-<p class="step-text">
-    Create a new sketch in Arduino IDE and paste the following code:
-</p>
-
-<div class="code-box">
-    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<pre><code>
-#include <arduinoFFT.h>
-
-// ================= EEG + FFT Config =====================
-#define SAMPLE_RATE 512
-#define FFT_SIZE 256
-#define BAUD_RATE 115200
-#define INPUT_PIN A0
-#define LED_PIN 2
-
-// ================= Frequency Bands ======================
-#define DELTA_LOW 0.5
-#define DELTA_HIGH 4.0
-#define THETA_LOW 4.0
-#define THETA_HIGH 8.0
-#define ALPHA_LOW 8.0
-#define ALPHA_HIGH 13.0
-#define BETA_LOW 13.0
-#define BETA_HIGH 30.0
-#define GAMMA_LOW 30.0
-#define GAMMA_HIGH 45.0
-
-// Less smoothing → responds faster
-#define SMOOTHING_FACTOR 0.35
-const float EPSILON = 1e-6f;
-
-// ================= Structs ==============================
-typedef struct {
-  float delta, theta, alpha, beta, gamma, total;
-} BandpowerResults;
-
-typedef struct {
-  float delta = 0, theta = 0, alpha = 0, beta = 0, gamma = 0, total = 0;
-} SmoothedBandpower;
-
-SmoothedBandpower smoothedPowers;
-
-// ================= FFT Buffers ==========================
-double vReal[FFT_SIZE];
-double vImag[FFT_SIZE];
-ArduinoFFT<double> FFT(vReal, vImag, FFT_SIZE, SAMPLE_RATE);
-
-// ================= Timing ================================
-unsigned long lastEmotionTime = 0;
-unsigned long sampling_period_us;
-
-// ================= Functions =============================
-void smoothBandpower(BandpowerResults *raw, SmoothedBandpower *s) {
-  s->delta = SMOOTHING_FACTOR * raw->delta + (1 - SMOOTHING_FACTOR) * s->delta;
-  s->theta = SMOOTHING_FACTOR * raw->theta + (1 - SMOOTHING_FACTOR) * s->theta;
-  s->alpha = SMOOTHING_FACTOR * raw->alpha + (1 - SMOOTHING_FACTOR) * s->alpha;
-  s->beta  = SMOOTHING_FACTOR * raw->beta  + (1 - SMOOTHING_FACTOR) * s->beta;
-  s->gamma = SMOOTHING_FACTOR * raw->gamma + (1 - SMOOTHING_FACTOR) * s->gamma;
-  s->total = SMOOTHING_FACTOR * raw->total + (1 - SMOOTHING_FACTOR) * s->total;
-}
-
-BandpowerResults calculateBandpower(double *powerSpectrum, double binWidth) {
-  BandpowerResults results = {0};
-
-  for (int i = 1; i < FFT_SIZE / 2; i++) {
-    float freq = i * binWidth;
-    float power = powerSpectrum[i];
-    results.total += power;
-
-    if (freq >= DELTA_LOW && freq < DELTA_HIGH) results.delta += power;
-    else if (freq >= THETA_LOW && freq < THETA_HIGH) results.theta += power;
-    else if (freq >= ALPHA_LOW && freq < ALPHA_HIGH) results.alpha += power;
-    else if (freq >= BETA_LOW  && freq < BETA_HIGH)  results.beta  += power;
-    else if (freq >= GAMMA_LOW && freq < GAMMA_HIGH) results.gamma += power;
-  }
-  return results;
-}
-
-// ================= Emotion Classification ==================
-void printEmotion() {
-  float d = (smoothedPowers.delta / (smoothedPowers.total + EPSILON)) * 100;
-  float t = (smoothedPowers.theta / (smoothedPowers.total + EPSILON)) * 100;
-  float a = (smoothedPowers.alpha / (smoothedPowers.total + EPSILON)) * 100;
-  float b = (smoothedPowers.beta  / (smoothedPowers.total + EPSILON)) * 100;
-  float g = (smoothedPowers.gamma / (smoothedPowers.total + EPSILON)) * 100;
-
-  String emotion = "Neutral";
-
-  // Very low signal → no contact
-  if (smoothedPowers.total < 0.001) {
-    emotion = "No Signal";
-  }
-  else if (d > 60 && b < 10 && g < 10) {
-    emotion = "Drowsy";
-  }
-  else if (t > a && t > b && t > 15) {
-    emotion = "Daydreaming";
-  }
-  else if (b > 25 && b > a) {
-    emotion = "Focused";
-  }
-  else if (a > 25 && a > b) {
-    emotion = "Calm";
-  }
-  else if (g > 15) {
-    emotion = "Hyper-aware";
-  }
-
-  Serial.print("Emotion: "); Serial.println(emotion);
-  Serial.print("Delta: "); Serial.print(d, 1);
-  Serial.print(" | Theta: "); Serial.print(t, 1);
-  Serial.print(" | Alpha: "); Serial.print(a, 1);
-  Serial.print(" | Beta: ");  Serial.print(b, 1);
-  Serial.print(" | Gamma: "); Serial.println(g, 1);
-}
-
-// ================= Setup ==================
-void setup() {
-  Serial.begin(115200);
-  pinMode(INPUT_PIN, INPUT);
-  pinMode(LED_PIN, OUTPUT);
-
-  sampling_period_us = round(1000000 * (1.0 / SAMPLE_RATE));
-
-  Serial.println("EEG Emotion Detection (Improved) Started...");
-}
-
-// ================= Loop ==================
-void loop() {
-  unsigned long microseconds;
-
-  // Sampling
-  for (int i = 0; i < FFT_SIZE; i++) {
-    microseconds = micros();
-    vReal[i] = analogRead(INPUT_PIN);
-    vImag[i] = 0;
-    while (micros() - microseconds < sampling_period_us);
-  }
-
-  // FFT Processing
-  FFT.windowing(FFT_WIN_TYP_HAMMING, FFT_FORWARD);
-  FFT.compute(FFT_FORWARD);
-  FFT.complexToMagnitude();
-
-  double binWidth = (1.0 * SAMPLE_RATE) / FFT_SIZE;
-
-  BandpowerResults raw = calculateBandpower(vReal, binWidth);
-  smoothBandpower(&raw, &smoothedPowers);
-
-  // LED = "Focus indicator" (simple)
-  double b_pct = (smoothedPowers.beta / (smoothedPowers.total + EPSILON)) * 100;
-  digitalWrite(LED_PIN, (b_pct > 20.0 ? HIGH : LOW));
-
-  // Print emotion every 5 sec
-  if (millis() - lastEmotionTime > 5000) {
-    printEmotion();
-    lastEmotionTime = millis();
-  }
-}
-</code></pre>
-</div>
-
-<!-- ===================== STEP 2 — RESULTS ===================== -->
-
-<h3 class="step-title">📊 Step 2: View Your Emotions Live</h3>
-
-<p class="step-text">
-    Open <b>Tools → Serial Monitor</b> in Arduino IDE and set the baud rate to <b>115200</b>.
-</p>
-
-<p class="step-text">You will see outputs like:</p>
-
-<div style="
-    background:#050505;
-    color:#00ff99;
-    padding:18px;
-    border-radius:14px;
-    font-family:monospace;
-    font-size:14px;
-    max-width:700px;
-    margin:20px auto;
-    border:1px solid #00ffdd;
-    box-shadow:0 0 16px rgba(0,255,230,0.5);
-">
-Emotion: Calm<br>
-Delta: 12.3 | Theta: 18.4 | Alpha: 32.1 | Beta: 10.5 | Gamma: 2.1<br><br>
-Emotion: Focused<br>
-Delta: 10.2 | Theta: 8.4 | Alpha: 14.1 | Beta: 29.5 | Gamma: 3.0
-</div>
 
 <p class="step-text" style="font-weight:600;">
     Congratulations! Your device is now reading brainwaves  
@@ -1096,4 +1098,5 @@ Delta: 10.2 | Theta: 8.4 | Alpha: 14.1 | Beta: 29.5 | Gamma: 3.0
     });
   }
 </script>
+
 
