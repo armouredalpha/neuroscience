@@ -1,128 +1,125 @@
-<!-- ===================== CYBERPUNK DARK MODE — GLOBAL STYLES ===================== -->
 <style>
-    /* ==== GLOBAL PAGE ==== */
-    body {
-        font-family: "Poppins", "Inter", sans-serif;
-        background: #0d0d0d; /* matte cyberpunk black */
-        color: #e5e5e5;
-        padding: 40px 20px;
-        line-height: 1.7;
-        text-align: center;
-    }
 
-    /* ==== NEON GRADIENT HEADINGS ==== */
-    h2, h3 {
-        background: linear-gradient(135deg, #00eaff, #b057ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+/* Global Dark Mode */
+body {
+    background: #0d1117 !important;
+    color: #e6edf3 !important;
+    font-family: "Poppins", sans-serif;
+    padding: 30px 20px;
+    line-height: 1.6;
+}
 
-    /* ==== CYBERPUNK CARD ==== */
-    .section-card {
-        max-width: 900px;
-        margin: 40px auto;
-        background: rgba(20, 20, 20, 0.9);
-        padding: 35px;
-        border-radius: 18px;
-        box-shadow: 0 0 25px rgba(0, 238, 255, 0.2),
-                    inset 0 0 20px rgba(176, 87, 255, 0.08);
-        border: 1px solid rgba(0, 238, 255, 0.25);
-        transition: 0.25s ease;
-    }
+/* Section Card Wrapper
+.section-card {
+    background: #161b22;
+    max-width: 900px;
+    margin: 25px auto;
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 6px solid #ff6b81;
+    box-shadow: 0 0 18px rgba(255,107,129,0.15);
+} */
 
-    .section-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 0 35px rgba(0, 238, 255, 0.35),
-                    inset 0 0 25px rgba(176, 87, 255, 0.12);
-    }
+.section-card {
+    background: #161b22;
+    width: 90%;                 /* take 90% of page width */
+    margin: 40px 0 100px 40px;   /* space from left + top + bottom */
+    padding: 25px;              /* inner spacing */
+    border-radius: 12px;
+    border-left: 6px solid #ff6b81;
+    box-shadow: 0 0 18px rgba(255,107,129,0.15);
+}
 
-    .section-card img {
-        width: 100%;
-        border-radius: 16px;
-        margin-top: 20px;
-        box-shadow: 0 0 20px rgba(0, 238, 255, 0.25);
-    }
 
-    /* ==== CYBERPUNK LISTS ==== */
-    ul {
-        text-align: left;
-        margin: 0 auto;
-        padding-left: 20px;
-        max-width: 700px;
-    }
 
-    /* ==== DIVIDER ==== */
-    hr {
-        margin: 40px auto;
-        border: 0;
-        height: 1px;
-        width: 65%;
-        background: linear-gradient(to right, transparent, #00eaff, transparent);
-    }
 
-    /* ========== NEON CODE BOX ========== */
-    .code-box {
-        background: #000000;
-        border: 1px solid #00eaff;
-        box-shadow: 0 0 20px rgba(0, 238, 255, 0.35),
-                    inset 0 0 20px rgba(0, 238, 255, 0.08);
-        border-radius: 16px;
-        padding: 20px;
-        margin: 40px auto;
-        max-width: 850px;
-        position: relative;
-        text-align: left;
-    }
+/* Headings */
+.section-card h2, 
+.step-title, 
+h3 {
+    text-align: left !important;
+    font-weight: 700;
+    color: #ff6b81 !important;
+    margin-bottom: 12px;
+    padding-left: 5px;
+}
 
-    .code-box pre {
-        color: #00ffea;
-        font-family: monospace;
-        white-space: pre-wrap;
-    }
+/* Paragraphs */
+.section-card p,
+.step-text,
+.section-card ul li {
+    text-align: left !important;
+    color: #e6edf3;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
 
-    /* ==== COPY BUTTON ==== */
-    .copy-btn {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        background: #00eaff;
-        color: #000;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 12px;
-        transition: 0.3s ease;
-    }
+/* Lists */
+ul {
+    margin-left: 0;
+    padding-left: 20px;
+}
+ul li {
+    margin-bottom: 6px;
+}
 
-    .copy-btn:hover {
-        background: #b057ff;
-        color: #fff;
-        box-shadow: 0 0 10px #b057ff;
-    }
+/* All Images Centered */
+img {
+    display: block !important;
+    margin: 20px auto !important;
+    max-width: 70% !important;
+    height: auto !important;
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(255,107,129,0.25);
+}
 
-    /* ==== CYBERPUNK STEP TITLES ==== */
-    .step-title {
-        font-size: 26px;
-        font-weight: 700;
-        margin-top: 50px;
-        background: linear-gradient(135deg,#ff3bbf,#00eaff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+/* Code Block */
+.code-box {
+    background: #111;
+    border: 1px solid #ff6b81;
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 900px;
+    margin: 25px auto;
+    box-shadow: 0 0 15px rgba(255,107,129,0.25);
+}
+.copy-btn {
+    background: #ff6b81;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    float: right;
+    margin-bottom: 10px;
+}
 
-    .step-text {
-        max-width: 850px;
-        margin: 10px auto 25px auto;
-        color: #cccccc;
-    }
+/* Uniform Image Glow Wrapper */
+.soft-glow-img {
+    max-width: 600px;
+    margin: 30px auto;
+    text-align: center;
+}
+.soft-glow-img img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(255,107,129,0.25);
+}
 </style>
 
 
-<!-- ===================== PROJECT 1 — NEUROGRIP (DARK MODE) ===================== -->
+
+
+
+
+
+
+
+
+
+
+<!-- ===================== PROJECT 1 — NEUROGRIP (FULL BOXED) ===================== -->
 
 <div class="section-card">
+
     <h2>Project 1: NeuroGrip ✋ → Controlling Servo Motor Using EMG</h2>
 
     <p>
@@ -161,6 +158,7 @@
 
     <h3>🧪 Step 2: Stacking on Arduino Uno</h3>
     <p>Align shield pins properly before pressing it in.</p>
+>
 
     <h3>🧴 Step 3: Skin Preparation</h3>
     <p>Apply NuPrep gel → rub gently → wipe clean.</p>
@@ -190,23 +188,18 @@
         Servo moves automatically based on muscle activation.
     </p>
 
-</div>
+    <h3>🧠 Step 7 — Upload the EMG → Servo Control Code</h3>
+    <p>Paste the following code into Arduino IDE and upload:</p>
 
-
-<h3 class="step-title">🧠 Step 7 — Upload the EMG → Servo Control Code</h3>
-<p class="step-text">
-    Paste the following code into Arduino IDE and upload:
-</p>
-
-<div class="code-box">
-    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <div class="code-box">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
 <pre><code>
 #if defined(ESP32) 
   // For ESP32 Servo library
-  #include <ESP32Servo.h>
+  #include &lt;ESP32Servo.h&gt;
 #else
   // Arduino Servo library
-  #include <Servo.h>
+  #include &lt;Servo.h&gt;
 #endif
 
 // Samples per second
@@ -370,29 +363,34 @@ float EMGFilter(float input)
 }
 
 </code></pre>
+    </div>
+
+    <h3>🦾 Step 9 — Control the Servo Claw</h3>
+    <p>
+        Flex your muscles → envelope rises → servo toggles.  
+        Stronger flex = higher EMG = faster servo movement.
+    </p>
+
 </div>
 
-<h3 class="step-title">🦾 Step 9 — Control the Servo Claw</h3>
-<p class="step-text">
-    Flex your muscles → envelope rises → servo toggles.  
-    Stronger flex = higher EMG = faster servo movement.
-</p>
+<!-- ===================== STEP 7 ===================== -->
 
- <!-- ===================== PROJECT 3 — MINDSCOPE (DARK MODE) ===================== -->
+<!-- ===================== PROJECT 3 — MINDSCOPE (FULL BOXED) ===================== -->
 
 <div class="section-card">
-    <h2>Project 2: MindScope 🔮 → Detecting Emotions Using EEG + GROK API</h2>
+
+    <h2>Project 2: MindScope 🔮 → Detecting Emotions Using EEG </h2>
 
     <p>
         In this project, you will record EEG signals using the <b>BioAmp EXG Pill</b>  
-        and an <b>ESP32 Dev Board</b>, extract brainwave bandpowers using FFT,  
+        and an <b>arduino Dev Board</b>, extract brainwave bandpowers using FFT,  
         and classify emotional states like <b>Focused, Calm, Drowsy, Daydreaming, Hyper-aware</b>.  
         The output appears live in the <b>Serial Monitor</b>.
     </p>
 
     <h3>🧰 Hardware Required</h3>
     <ul>
-        <li>ESP32 Dev Board</li>
+        <li>arduino Dev Board</li>
         <li>BioAmp EXG Pill</li>
         <li>BioAmp Cable v3</li>
         <li>3 × Gel Electrodes</li>
@@ -409,354 +407,60 @@ float EMGFilter(float input)
     </ul>
 
     <h3>🔌 Circuit Diagram</h3>
-    <img src="https://content.instructables.com/F15/XHD3/M98IG675/F15XHD3M98IG675.png"
-         alt="Circuit diagram showing EEG setup">
+    <img src="https://content.instructables.com/F15/XHD3/M98IG675/F15XHD3M98IG675.png" alt="Circuit diagram showing EEG setup">
 
-    <h3>📍 Electrode Placement</h3>
-    <img src="https://content.instructables.com/FGF/1Q7B/M98IG66R/FGF1Q7BM98IG66R.png"
-         alt="Electrode placement diagram">
+    <h3>🧪 Step 1: Upload the EEG Emotion Detection Program</h3>
+<h3 style="color:#ff8fa3; text-align:left; margin-top:30px;">📍 Electrode Placement</h3>
 
-    <p style="text-align:center; max-width:800px; margin:15px auto;">
-        Apply <b>NuPrep Gel</b>, clean with a wet wipe, and place electrodes  
-        according to the diagram. Ensure firm contact for the best EEG signal.
-    </p>
-</div>
-
-<!-- ===================== STEP 1 — UPLOAD CODE ===================== -->
-
-<h3 class="step-title">🧪 Step 1: Upload the EEG Emotion Detection Program</h3>
-
-<p class="step-text">
-    Create a new sketch in Arduino IDE and paste the following code:
-</p>
-
-<div class="code-box">
-    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<pre><code>
-#include <arduinoFFT.h>
-
-// ================= EEG + FFT Config =====================
-#define SAMPLE_RATE 512
-#define FFT_SIZE 256
-#define BAUD_RATE 115200
-#define INPUT_PIN A0
-#define LED_PIN 2
-
-// ================= Frequency Bands ======================
-#define DELTA_LOW 0.5
-#define DELTA_HIGH 4.0
-#define THETA_LOW 4.0
-#define THETA_HIGH 8.0
-#define ALPHA_LOW 8.0
-#define ALPHA_HIGH 13.0
-#define BETA_LOW 13.0
-#define BETA_HIGH 30.0
-#define GAMMA_LOW 30.0
-#define GAMMA_HIGH 45.0
-
-// Less smoothing → responds faster
-#define SMOOTHING_FACTOR 0.35
-const float EPSILON = 1e-6f;
-
-// ================= Structs ==============================
-typedef struct {
-  float delta, theta, alpha, beta, gamma, total;
-} BandpowerResults;
-
-typedef struct {
-  float delta = 0, theta = 0, alpha = 0, beta = 0, gamma = 0, total = 0;
-} SmoothedBandpower;
-
-SmoothedBandpower smoothedPowers;
-
-// ================= FFT Buffers ==========================
-double vReal[FFT_SIZE];
-double vImag[FFT_SIZE];
-ArduinoFFT<double> FFT(vReal, vImag, FFT_SIZE, SAMPLE_RATE);
-
-// ================= Timing ================================
-unsigned long lastEmotionTime = 0;
-unsigned long sampling_period_us;
-
-// ================= Functions =============================
-void smoothBandpower(BandpowerResults *raw, SmoothedBandpower *s) {
-  s->delta = SMOOTHING_FACTOR * raw->delta + (1 - SMOOTHING_FACTOR) * s->delta;
-  s->theta = SMOOTHING_FACTOR * raw->theta + (1 - SMOOTHING_FACTOR) * s->theta;
-  s->alpha = SMOOTHING_FACTOR * raw->alpha + (1 - SMOOTHING_FACTOR) * s->alpha;
-  s->beta  = SMOOTHING_FACTOR * raw->beta  + (1 - SMOOTHING_FACTOR) * s->beta;
-  s->gamma = SMOOTHING_FACTOR * raw->gamma + (1 - SMOOTHING_FACTOR) * s->gamma;
-  s->total = SMOOTHING_FACTOR * raw->total + (1 - SMOOTHING_FACTOR) * s->total;
-}
-
-BandpowerResults calculateBandpower(double *powerSpectrum, double binWidth) {
-  BandpowerResults results = {0};
-
-  for (int i = 1; i < FFT_SIZE / 2; i++) {
-    float freq = i * binWidth;
-    float power = powerSpectrum[i];
-    results.total += power;
-
-    if (freq >= DELTA_LOW && freq < DELTA_HIGH) results.delta += power;
-    else if (freq >= THETA_LOW && freq < THETA_HIGH) results.theta += power;
-    else if (freq >= ALPHA_LOW && freq < ALPHA_HIGH) results.alpha += power;
-    else if (freq >= BETA_LOW  && freq < BETA_HIGH)  results.beta  += power;
-    else if (freq >= GAMMA_LOW && freq < GAMMA_HIGH) results.gamma += power;
-  }
-  return results;
-}
-
-// ================= Emotion Classification ==================
-void printEmotion() {
-  float d = (smoothedPowers.delta / (smoothedPowers.total + EPSILON)) * 100;
-  float t = (smoothedPowers.theta / (smoothedPowers.total + EPSILON)) * 100;
-  float a = (smoothedPowers.alpha / (smoothedPowers.total + EPSILON)) * 100;
-  float b = (smoothedPowers.beta  / (smoothedPowers.total + EPSILON)) * 100;
-  float g = (smoothedPowers.gamma / (smoothedPowers.total + EPSILON)) * 100;
-
-  String emotion = "Neutral";
-
-  // Very low signal → no contact
-  if (smoothedPowers.total < 0.001) {
-    emotion = "No Signal";
-  }
-  else if (d > 60 && b < 10 && g < 10) {
-    emotion = "Drowsy";
-  }
-  else if (t > a && t > b && t > 15) {
-    emotion = "Daydreaming";
-  }
-  else if (b > 25 && b > a) {
-    emotion = "Focused";
-  }
-  else if (a > 25 && a > b) {
-    emotion = "Calm";
-  }
-  else if (g > 15) {
-    emotion = "Hyper-aware";
-  }
-
-  Serial.print("Emotion: "); Serial.println(emotion);
-  Serial.print("Delta: "); Serial.print(d, 1);
-  Serial.print(" | Theta: "); Serial.print(t, 1);
-  Serial.print(" | Alpha: "); Serial.print(a, 1);
-  Serial.print(" | Beta: ");  Serial.print(b, 1);
-  Serial.print(" | Gamma: "); Serial.println(g, 1);
-}
-
-// ================= Setup ==================
-void setup() {
-  Serial.begin(115200);
-  pinMode(INPUT_PIN, INPUT);
-  pinMode(LED_PIN, OUTPUT);
-
-  sampling_period_us = round(1000000 * (1.0 / SAMPLE_RATE));
-
-  Serial.println("EEG Emotion Detection (Improved) Started...");
-}
-
-// ================= Loop ==================
-void loop() {
-  unsigned long microseconds;
-
-  // Sampling
-  for (int i = 0; i < FFT_SIZE; i++) {
-    microseconds = micros();
-    vReal[i] = analogRead(INPUT_PIN);
-    vImag[i] = 0;
-    while (micros() - microseconds < sampling_period_us);
-  }
-
-  // FFT Processing
-  FFT.windowing(FFT_WIN_TYP_HAMMING, FFT_FORWARD);
-  FFT.compute(FFT_FORWARD);
-  FFT.complexToMagnitude();
-
-  double binWidth = (1.0 * SAMPLE_RATE) / FFT_SIZE;
-
-  BandpowerResults raw = calculateBandpower(vReal, binWidth);
-  smoothBandpower(&raw, &smoothedPowers);
-
-  // LED = "Focus indicator" (simple)
-  double b_pct = (smoothedPowers.beta / (smoothedPowers.total + EPSILON)) * 100;
-  digitalWrite(LED_PIN, (b_pct > 20.0 ? HIGH : LOW));
-
-  // Print emotion every 5 sec
-  if (millis() - lastEmotionTime > 5000) {
-    printEmotion();
-    lastEmotionTime = millis();
-  }
-}
-</code></pre>
-</div>
-
-<!-- ===================== STEP 2 — RESULTS ===================== -->
-
-<h3 class="step-title">📊 Step 2: View Your Emotions Live</h3>
-
-<p class="step-text">
-    Open <b>Tools → Serial Monitor</b> in Arduino IDE and set the baud rate to <b>115200</b>.
-</p>
-
-<p class="step-text">You will see outputs like:</p>
-
-<div style="
-    background:#050505;
-    color:#00ff99;
-    padding:18px;
-    border-radius:14px;
-    font-family:monospace;
-    font-size:14px;
-    max-width:700px;
-    margin:20px auto;
-    border:1px solid #00ffdd;
-    box-shadow:0 0 16px rgba(0,255,230,0.5);
-">
-Emotion: Calm<br>
-Delta: 12.3 | Theta: 18.4 | Alpha: 32.1 | Beta: 10.5 | Gamma: 2.1<br><br>
-Emotion: Focused<br>
-Delta: 10.2 | Theta: 8.4 | Alpha: 14.1 | Beta: 29.5 | Gamma: 3.0
-</div>
-
-<!-- ===================== PROJECT 2 — BLINK-A-SAUR (DARK MODE) ===================== -->
-
-<div class="section-card">
-    <h2>Project 3: Blink-a-saur 🦖 → Control Dino Game Using EOG Signals</h2>
-
-    <p>
-        In this project, you will create a fun game controller that lets you 
-        <b>play the Chrome Dino Game using your eye blinks</b>.  
-        Using EOG (Electrooculography) signals from your eyes,  
-        the system detects blinks and triggers a <b>keyboard SPACE press</b> — letting the Dino jump!
-    </p>
-
-    <h3>👁️ What is Electrooculography (EOG)?</h3>
-    <p>
-        Electrooculography is a technique used to measure the electrical potential 
-        produced by eye movement. The cornea is positively charged and the retina 
-        is negatively charged, creating a standing potential known as the 
-        <b>electrooculogram</b>. When you blink or move your eyes, this potential changes,  
-        and we can detect it using biopotential amplifiers like the <b>BioAmp EXG Pill</b>.
-    </p>
-
-    <h3>🧰 Supplies Needed</h3>
-
-    <p><b>HARDWARE:</b></p>
-    <ul>
-        <li>DIY Neuroscience Kit Pro (includes EXG Pill, electrodes, gels, bands, Arduino Uno, etc.)</li>
-        <li>BioAmp Cable (100 cm)</li>
-        <li>Gel Electrodes</li>
-        <li>NuPrep Skin Preparation Gel</li>
-        <li>Wet wipes</li>
+<!-- ===== Image 1: Band Placement ===== -->
+<div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <img src="band.jpg" alt="">
+    <ul style="text-align:left; color:#e6edf3; margin-top:12px; font-size:15px;">
+        <li>Place the two EEG electrodes on the Brain BioAmp Band.</li>
+        <li>IN+ on the left side, IN− on the right side.</li>
+        <li>Ensure metal points touch the skin firmly.</li>
     </ul>
-
-    <p><b>SOFTWARE:</b></p>
-    <ul>
-        <li>Arduino IDE</li>
-        <li>Visual Studio Code</li>
-        <li>Python</li>
-    </ul>
-
-    <h3>🔬 About DIY Neuroscience Kit Pro</h3>
-    <p>
-        It works like a <b>portable neuroscience lab</b>, capable of recording 
-        multiple biopotentials — EEG, EMG, ECG, and EOG.  
-        It's designed for students learning Human-Computer Interaction (HCI) 
-        and Brain-Computer Interfaces (BCI).
-    </p>
-
-    <h3>🧪 Step 1: Stack Muscle BioAmp Shield on Arduino Uno</h3>
-    <p>
-        Carefully stack the <b>Muscle BioAmp Shield</b> on the Arduino Uno.  
-        Make sure the pins align perfectly before pressing it down.
-    </p>
-
-    <img src="PUT-YOUR-IMAGE-LINK-HERE.jpg" alt="Muscle BioAmp Shield stacked on Arduino">
 </div>
 
-<!-- ---------------------- PROJECT 2 DETAILED STEPS ---------------------- -->
+<!-- ===== Image 2: Band on Forehead ===== -->
+<div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <img src="backofhead.jpg" alt="">
+    <ul style="text-align:left; color:#e6edf3; margin-top:12px; font-size:15px;">
+        <li>Place the band properly on the forehead.</li>
+        <li>Keep the band tight enough for stable contact.</li>
+        <li>Avoid hair covering the electrodes.</li>
+    </ul>
+</div>
 
-<h3 class="step-title">🧪 Step 1: Stack Muscle BioAmp Shield on Arduino Uno</h3>
-<p class="step-text">
-    Align all pins perfectly before pressing.
-</p>
+<!-- ===== Image 3: REF Electrode ===== -->
+<div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <img src="backofear.jpg" alt="">
+    <ul style="text-align:left; color:#e6edf3; margin-top:12px; font-size:15px;">
+        <li>Attach the REF electrode behind the earlobe.</li>
+        <li>Place it on the hard bony area for stability.</li>
+        <li>This improves noise reduction and signal clarity.</li>
+    </ul>
+</div>
+    <h3>🧠 Step 1 Code: EEG Emotion Detection</h3>
+    <p>
+        Create a new sketch in Arduino IDE and paste the following code:
+    </p>
 
-<img src="https://content.instructables.com/FUW/57PB/LY4F6XOC/FUW57PBLY4F6XOC.png?auto=webp&frame=1&crop=3:2&width=600&height=1024&fit=bounds"
-     style="width:100%; border-radius:16px; margin-top:20px;"
-     alt="Stacking example 1">
-
-<img src="https://content.instructables.com/F7P/NORA/LY4F6XO1/F7PNORALY4F6XO1.png?auto=webp&frame=1&crop=3:2&width=600&height=1024&fit=bounds"
-     style="width:100%; border-radius:16px; margin-top:20px;"
-     alt="Stacking example 2">
-
-<p class="step-text">
-    Connect the <b>BioAmp EXG Pill</b> to the <b>A2 port</b> on the Muscle BioAmp Shield using the 3-pin STEMMA cable as shown above.
-</p>
-
-<h3 class="step-title">🔌 Step 3: Connecting Electrode Cable</h3>
-<p class="step-text">
-    Connect the <b>BioAmp Cable</b> to the BioAmp EXG Pill exactly as shown in the reference video.
-</p>
-
-<h3 class="step-title">🧴 Step 4: Skin Preparation</h3>
-<p class="step-text">
-    Apply <b>NuPrep Skin Preparation Gel</b> on the skin surface where electrodes will be placed  
-    to remove dead skin cells and clean the area. After rubbing thoroughly, clean it with a wet wipe.
-</p>
-
-<p class="step-text">
-    <b>About NuPrep Gel:</b><br>
-    Nuprep improves conductivity by lowering skin impedance.  
-    It removes the top dry skin layer and hydrates the surface, ensuring clear biopotential recordings.
-</p>
-
-<h3 class="step-title">📍 Step 5: Electrode Placements</h3>
-
-<img src="https://content.instructables.com/FM2/O1W6/LNRH8FXV/FM2O1W6LNRH8FXV.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds"
-     style="width:100%; border-radius:16px; margin-top:20px;"
-     alt="EOG electrode placement">
-
-<ul class="center-ul">
-    <li>Connect the BioAmp Cable to the gel electrodes</li>
-    <li>Peel off the plastic backing from the electrodes</li>
-    <li>Place:
-        <br>• <b>IN+</b> — On the forehead  
-        <br>• <b>IN−</b> — Just below the eye  
-        <br>• <b>REF</b> — On the bony part behind your earlobe
-    </li>
-</ul>
-
-<h3 class="step-title">💻 Step 6: Download Arduino IDE</h3>
-<p class="step-text">
-    Download the Arduino IDE from:  
-    <a href="https://www.arduino.cc/en/software" target="_blank">https://www.arduino.cc/en/software</a>
-</p>
-<p class="step-text">
-    <b>Important:</b> Install <b>Arduino IDE 1.8.19 (Legacy Version)</b> for proper signal visualization.  
-    After installation, connect the Arduino Uno to your laptop using the USB cable.
-</p>
-
-<h3 class="step-title">⌨️ Step 7: Coding Time!</h3>
-<p class="step-text">
-    Download and unzip the firmware repository:  
-    <a href="https://github.com/upsidedownlabs/Eye-BioAmp-Arduino-Firmware" target="_blank">
-        Eye BioAmp Arduino Firmware (GitHub)
-    </a>
-</p>
-
-<p class="step-text">
-    Navigate to <code>6_EOGDinoGame</code> → open <code>6_EOGDinoGame.ino</code> in Arduino IDE.  
-    Go to <b>Tools → Board → Arduino UNO</b>, then select the correct <b>COM Port</b>.
-</p>
-
-<h3 class="step-title">🧠 Step 7 Code: EOG Dino Game Controller</h3>
-
-<div class="code-box">
-    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <div class="code-box">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
 <pre><code>
+// This code is designed to work specifically on:
+// 1. Arduino UNO R4 Minima
+// 2. Arduino UNO R4 WiFi
 
-#include <Arduino.h>
-#include <Keyboard.h>  // HID keyboard library for Arduino R4
-#include <math.h>
+// EOG Dino Game Controller using Single Blink Detection
+// Single Blink = Space Bar (Jump/Action)
+// Perfect for Chrome Dino Game, Flappy Bird, or any space-triggered games
+// Adapted from Slide-Control.ino with simplified single blink detection
+
+#include &lt;Arduino.h&gt;
+#include &lt;Keyboard.h&gt;  // HID keyboard library for Arduino R4
+#include &lt;math.h&gt;
 
 // #define DEBUG  // Uncomment this line to enable debugging
 
@@ -1045,59 +749,326 @@ void loop() {
     #endif
 }
 </code></pre>
+    </div>
+
+    <h3>📊 Step 2: View Your Emotions Live</h3>
+
+    <p>
+        Open <b>Tools → Serial Monitor</b> in Arduino IDE  
+        and set the baud rate to <b>115200</b>.
+    </p>
+
+    <p>You will see outputs like:</p>
+
+    <div style="
+        background:#050505;
+        color:#00ff99;
+        padding:18px;
+        border-radius:14px;
+        font-family:monospace;
+        font-size:14px;
+        max-width:700px;
+        margin:20px auto;
+        border:1px solid #ff6b81;
+        box-shadow:0 0 16px rgba(255,107,129,0.4);
+    ">
+Emotion: Calm<br>
+Delta: 12.3 | Theta: 18.4 | Alpha: 32.1 | Beta: 10.5 | Gamma: 2.1<br><br>
+Emotion: Focused<br>
+Delta: 10.2 | Theta: 8.4 | Alpha: 14.1 | Beta: 29.5 | Gamma: 3.0
+    </div>
+
+</div>
+<!-- ===================== PROJECT 2 — BLINK-A-SAUR (FULL BOXED) ===================== -->
+
+<div class="section-card">
+
+    <h2>Project 3: Blink-a-saur 🦖 → Control Dino Game Using EOG Signals</h2>
+
+    <p>
+        In this project, you will create a fun game controller that lets you 
+        <b>play the Chrome Dino Game using your eye blinks</b>.  
+        Using EOG (Electrooculography) signals from your eyes,  
+        the system detects blinks and triggers a <b>keyboard SPACE press</b> — making the Dino jump!
+    </p>
+
+    <h3>👁️ What is Electrooculography (EOG)?</h3>
+    <p>
+        Electrooculography measures the electrical potential produced by eye movement.  
+        The cornea is positively charged, the retina is negatively charged — creating the  
+        <b>electrooculogram</b>. When you blink, this voltage changes, and we detect it using  
+        the <b>BioAmp EXG Pill</b>.
+    </p>
+
+    <h3>🧰 Supplies Needed</h3>
+    <p><b>HARDWARE:</b></p>
+    <ul>
+        <li>DIY Neuroscience Kit Pro</li>
+        <li>BioAmp Cable (100 cm)</li>
+        <li>Gel Electrodes</li>
+        <li>NuPrep Skin Preparation Gel</li>
+        <li>Wet wipes</li>
+    </ul>
+
+    <p><b>SOFTWARE:</b></p>
+    <ul>
+        <li>Arduino IDE</li>
+        <li>Visual Studio Code</li>
+        <li>Python</li>
+    </ul>
+
+    <h3>🔬 About DIY Neuroscience Kit Pro</h3>
+    <p>
+        A complete portable neuroscience lab for EEG, EMG, ECG and EOG recordings —  
+        designed for HCI and BCI projects.
+    </p>
+
+    <h3>🧪 Step 1: Stack Muscle BioAmp Shield on Arduino Uno</h3>
+    <p>Carefully align the pins and stack the <b>Muscle BioAmp Shield</b> on top of Arduino Uno.</p>
+
+
+    <h3>🧪 Step 1: Stack Muscle BioAmp Shield</h3>
+    <p>Align all pins properly before pressing the Shield into the Arduino.</p>
+
+    <img src="https://content.instructables.com/FUW/57PB/LY4F6XOC/FUW57PBLY4F6XOC.png"
+         alt="Stacking example 1">
+    <img src="https://content.instructables.com/F7P/NORA/LY4F6XO1/F7PNORALY4F6XO1.png"
+         alt="Stacking example 2">
+
+    <p>Connect the <b>BioAmp EXG Pill</b> to the <b>A2 port</b> using the STEMMA cable.</p>
+
+    <h3>🔌 Step 3: Connecting Electrode Cable</h3>
+    <p>Plug the BioAmp Cable into the EXG Pill exactly as shown.</p>
+
+    <h3>🧴 Step 4: Skin Preparation</h3>
+    <p>
+        Apply <b>NuPrep Gel</b> → rub gently → clean with wet wipe.  
+        This reduces skin impedance and improves EOG signal quality.
+    </p>
+
+    <p><b>About NuPrep:</b> Removes dry skin and improves conductivity.</p>
+
+    <h3>📍 Step 5: Electrode Placements</h3>
+    <img src="https://content.instructables.com/FM2/O1W6/LNRH8FXV/FM2O1W6LNRH8FXV.jpg" alt="Electrode placement">
+
+    <ul>
+        <li>IN+ → Forehead</li>
+        <li>IN− → Below the eye</li>
+        <li>REF → Behind the earlobe</li>
+    </ul>
+
+    <h3>💻 Step 6: Download Arduino IDE</h3>
+    <p>
+        Download from:  
+        <a href="https://www.arduino.cc/en/software" target="_blank">https://www.arduino.cc/en/software</a>
+    </p>
+    <p>Install <b>Arduino IDE 1.8.19</b> for best signal performance.</p>
+
+    <h3>⌨️ Step 7: Coding Time!</h3>
+    <p>Open <code>6_EOGDinoGame.ino</code> → Select COM port → Upload.</p>
+
+    <h3>🧠 Step 7 Code: EOG Dino Game Controller</h3>
+
+    <div class="code-box">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<pre><code>
+#include &lt;arduinoFFT.h&gt;
+
+// ================= EEG + FFT Config =====================
+#define SAMPLE_RATE 512
+#define FFT_SIZE 256
+#define BAUD_RATE 115200
+#define INPUT_PIN A0
+#define LED_PIN 2
+
+// ================= Frequency Bands ======================
+#define DELTA_LOW 0.5
+#define DELTA_HIGH 4.0
+#define THETA_LOW 4.0
+#define THETA_HIGH 8.0
+#define ALPHA_LOW 8.0
+#define ALPHA_HIGH 13.0
+#define BETA_LOW 13.0
+#define BETA_HIGH 30.0
+#define GAMMA_LOW 30.0
+#define GAMMA_HIGH 45.0
+
+// Less smoothing → responds faster
+#define SMOOTHING_FACTOR 0.35
+const float EPSILON = 1e-6f;
+
+// ================= Structs ==============================
+typedef struct {
+  float delta, theta, alpha, beta, gamma, total;
+} BandpowerResults;
+
+typedef struct {
+  float delta = 0, theta = 0, alpha = 0, beta = 0, gamma = 0, total = 0;
+} SmoothedBandpower;
+
+SmoothedBandpower smoothedPowers;
+
+// ================= FFT Buffers ==========================
+double vReal[FFT_SIZE];
+double vImag[FFT_SIZE];
+ArduinoFFT<double> FFT(vReal, vImag, FFT_SIZE, SAMPLE_RATE);
+
+// ================= Timing ================================
+unsigned long lastEmotionTime = 0;
+unsigned long sampling_period_us;
+
+// ================= Functions =============================
+void smoothBandpower(BandpowerResults *raw, SmoothedBandpower *s) {
+  s->delta = SMOOTHING_FACTOR * raw->delta + (1 - SMOOTHING_FACTOR) * s->delta;
+  s->theta = SMOOTHING_FACTOR * raw->theta + (1 - SMOOTHING_FACTOR) * s->theta;
+  s->alpha = SMOOTHING_FACTOR * raw->alpha + (1 - SMOOTHING_FACTOR) * s->alpha;
+  s->beta  = SMOOTHING_FACTOR * raw->beta  + (1 - SMOOTHING_FACTOR) * s->beta;
+  s->gamma = SMOOTHING_FACTOR * raw->gamma + (1 - SMOOTHING_FACTOR) * s->gamma;
+  s->total = SMOOTHING_FACTOR * raw->total + (1 - SMOOTHING_FACTOR) * s->total;
+}
+
+BandpowerResults calculateBandpower(double *powerSpectrum, double binWidth) {
+  BandpowerResults results = {0};
+
+  for (int i = 1; i < FFT_SIZE / 2; i++) {
+    float freq = i * binWidth;
+    float power = powerSpectrum[i];
+    results.total += power;
+
+    if (freq >= DELTA_LOW && freq < DELTA_HIGH) results.delta += power;
+    else if (freq >= THETA_LOW && freq < THETA_HIGH) results.theta += power;
+    else if (freq >= ALPHA_LOW && freq < ALPHA_HIGH) results.alpha += power;
+    else if (freq >= BETA_LOW  && freq < BETA_HIGH)  results.beta  += power;
+    else if (freq >= GAMMA_LOW && freq < GAMMA_HIGH) results.gamma += power;
+  }
+  return results;
+}
+
+// ================= Emotion Classification ==================
+void printEmotion() {
+  float d = (smoothedPowers.delta / (smoothedPowers.total + EPSILON)) * 100;
+  float t = (smoothedPowers.theta / (smoothedPowers.total + EPSILON)) * 100;
+  float a = (smoothedPowers.alpha / (smoothedPowers.total + EPSILON)) * 100;
+  float b = (smoothedPowers.beta  / (smoothedPowers.total + EPSILON)) * 100;
+  float g = (smoothedPowers.gamma / (smoothedPowers.total + EPSILON)) * 100;
+
+  String emotion = "Neutral";
+
+  // Very low signal → no contact
+  if (smoothedPowers.total < 0.001) {
+    emotion = "No Signal";
+  }
+  else if (d > 60 && b < 10 && g < 10) {
+    emotion = "Drowsy";
+  }
+  else if (t > a && t > b && t > 15) {
+    emotion = "Daydreaming";
+  }
+  else if (b > 25 && b > a) {
+    emotion = "Focused";
+  }
+  else if (a > 25 && a > b) {
+    emotion = "Calm";
+  }
+  else if (g > 15) {
+    emotion = "Hyper-aware";
+  }
+
+  Serial.print("Emotion: "); Serial.println(emotion);
+  Serial.print("Delta: "); Serial.print(d, 1);
+  Serial.print(" | Theta: "); Serial.print(t, 1);
+  Serial.print(" | Alpha: "); Serial.print(a, 1);
+  Serial.print(" | Beta: ");  Serial.print(b, 1);
+  Serial.print(" | Gamma: "); Serial.println(g, 1);
+}
+
+// ================= Setup ==================
+void setup() {
+  Serial.begin(115200);
+  pinMode(INPUT_PIN, INPUT);
+  pinMode(LED_PIN, OUTPUT);
+
+  sampling_period_us = round(1000000 * (1.0 / SAMPLE_RATE));
+
+  Serial.println("EEG Emotion Detection (Improved) Started...");
+}
+
+// ================= Loop ==================
+void loop() {
+  unsigned long microseconds;
+
+  // Sampling
+  for (int i = 0; i < FFT_SIZE; i++) {
+    microseconds = micros();
+    vReal[i] = analogRead(INPUT_PIN);
+    vImag[i] = 0;
+    while (micros() - microseconds < sampling_period_us);
+  }
+
+  // FFT Processing
+  FFT.windowing(FFT_WIN_TYP_HAMMING, FFT_FORWARD);
+  FFT.compute(FFT_FORWARD);
+  FFT.complexToMagnitude();
+
+  double binWidth = (1.0 * SAMPLE_RATE) / FFT_SIZE;
+
+  BandpowerResults raw = calculateBandpower(vReal, binWidth);
+  smoothBandpower(&raw, &smoothedPowers);
+
+  // LED = "Focus indicator" (simple)
+  double b_pct = (smoothedPowers.beta / (smoothedPowers.total + EPSILON)) * 100;
+  digitalWrite(LED_PIN, (b_pct > 20.0 ? HIGH : LOW));
+
+  // Print emotion every 5 sec
+  if (millis() - lastEmotionTime > 5000) {
+    printEmotion();
+    lastEmotionTime = millis();
+  }
+}
+</code></pre>
+    </div>
+
+    <p><b>IMPORTANT:</b> Keep laptop unplugged and stay ~5m away from AC appliances.</p>
+
+    <h3>📊 Step 8: Testing the Connections</h3>
+    <p>
+        Open Serial Plotter → Press SW1 → Blink → Observe clear spike signals.
+    </p>
+
+    <h3>🦖 Step 10: Play the Game!</h3>
+    <p>
+        Control the <b>Chrome Dino Game</b> using only your <b>eye blinks</b> 🎉
+    </p>
+
+    <ul>
+        <li>Open Google Chrome</li>
+        <li>Visit <code>chrome://dino/</code></li>
+        <li>Press Space once to start</li>
+        <li>Blink → Dino Jumps!</li>
+    </ul>
+
+    <p style="font-weight:600; color:#ff8fa3;">
+        Stronger blinks = higher accuracy 😎👁️🦖
+    </p>
+
+    
 </div>
 
-<p class="step-text"><b>IMPORTANT:</b><br>
-    Make sure your laptop is <b>not connected to a charger</b> and sit about <b>5m away</b>  
-    from AC appliances for clean EOG signal acquisition.
-</p>
+<script>
+function copyCode(btn) {
+    // Find the <code> element right next to the button
+    const codeElement = btn.parentElement.querySelector("code");
 
-<h3 class="step-title">📊 Step 8: Testing the Connections</h3>
-<p class="step-text">
-    In Arduino IDE, open <b>Tools → Serial Plotter</b>.  
-    Press the <b>SW1</b> button on the Muscle BioAmp Shield — the green LED on the LED bar should glow.  
-    Now blink your eyes and observe clear spikes in the Serial Plotter.
-</p>
+    // Get text inside code block
+    const codeText = codeElement.innerText;
 
-<h3 class="step-title">🦖 Step 10: Play the Game!</h3>
-<p class="step-text">
-    You're now ready to control the <b>Chrome Dino Game</b> using only your <b>eye blinks</b> 🎉  
-</p>
-
-<ul class="center-ul">
-    <li>Open Google Chrome</li>
-    <li>Go to: <code>chrome://dino/</code></li>
-    <li>Or go offline and try to browse any page to launch the game</li>
-    <li>Press <b>Space</b> once to start the game</li>
-    <li>Now blink your eyes to <b>make the Dino jump!</b></li>
-</ul>
-
-<p class="step-text" style="font-weight:600;">
-    If your blink amplitude is strong enough, the controller will detect it  
-    and trigger a <b>Space bar press</b> each time.  
-    Try different blink intensities to find your sweet spot 😎👁️🦖
-</p>
-
-<p class="step-text" style="font-weight:600;">
-    Congratulations! Your device is now reading brainwaves  
-    and detecting your <b>emotional state in real-time</b> 🔮🧠✨
-</p>
-
- <script>
-  function copyCode(button) {
-    const codeBox = button.nextElementSibling;
-    const code = codeBox.innerText;
-
-    navigator.clipboard.writeText(code).then(() => {
-      button.innerText = "Copied!";
-      setTimeout(() => {
-        button.innerText = "Copy";
-      }, 2000);
-    }).catch(err => {
-      console.error('Failed to copy text: ', err);
-    });
-  }
+    navigator.clipboard.writeText(codeText)
+        .then(() => {
+            btn.innerText = "Copied!";
+            setTimeout(() => { btn.innerText = "Copy"; }, 2000);
+        })
+        .catch(() => {
+            alert("Copy failed. Please copy manually.");
+        });
+}
 </script>
-
-
-
