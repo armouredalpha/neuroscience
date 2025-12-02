@@ -194,12 +194,14 @@ img {
     <div class="code-box">
         <button class="copy-btn" onclick="copyCode(this)">Copy</button>
 <pre><code>
+<script type="text/plain">
+
 #if defined(ESP32) 
   // For ESP32 Servo library
-  #include &lt;ESP32Servo.h&gt;
+  #include <ESP32Servo.h>;
 #else
   // Arduino Servo library
-  #include &lt;Servo.h&gt;
+  #include <Servo.h>;
 #endif
 
 // Samples per second
@@ -362,6 +364,7 @@ float EMGFilter(float input)
   return output;
 }
 
+</script>
 </code></pre>
     </div>
 
@@ -449,7 +452,9 @@ float EMGFilter(float input)
     <div class="code-box">
         <button class="copy-btn" onclick="copyCode(this)">Copy</button>
 <pre><code>
-    #include &lt;arduinoFFT.h&gt;
+<script type="text/plain">
+
+    #include <arduinoFFT.h>;
 
 // ================= EEG + FFT Config =====================
 #define SAMPLE_RATE 512
@@ -603,6 +608,7 @@ void loop() {
   }
 }
    
+</script>
 
 </code></pre>
     </div>
@@ -728,6 +734,8 @@ Delta: 10.2 | Theta: 8.4 | Alpha: 14.1 | Beta: 29.5 | Gamma: 3.0
     <div class="code-box">
         <button class="copy-btn" onclick="copyCode(this)">Copy</button>
 <pre><code>
+<script type="text/plain">
+
    
 // This code is designed to work specifically on:
 // 1. Arduino UNO R4 Minima
@@ -738,9 +746,9 @@ Delta: 10.2 | Theta: 8.4 | Alpha: 14.1 | Beta: 29.5 | Gamma: 3.0
 // Perfect for Chrome Dino Game, Flappy Bird, or any space-triggered games
 // Adapted from Slide-Control.ino with simplified single blink detection
 
-#include &lt;Arduino.h&gt;
-#include &lt;Keyboard.h&gt;  // HID keyboard library for Arduino R4
-#include &lt;math.h&gt;
+#include <Arduino.h>;
+#include <Keyboard.h>;  // HID keyboard library for Arduino R4
+#include <math.h>;
 
 // #define DEBUG  // Uncomment this line to enable debugging
 
@@ -1028,6 +1036,7 @@ void loop() {
     }
     #endif
 }
+</script>
 </code></pre>
     </div>
 
