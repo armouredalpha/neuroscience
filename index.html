@@ -153,41 +153,71 @@ img {
         <li>Electrode Gel</li>
         <li>Arduino IDE</li>
     </ul>
-
+<div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <img src="arduniofirst.jpg" alt="">
+</div>
     <hr>
 
     <h3>🧪 Step 2: Stacking on Arduino Uno</h3>
     <p>Align shield pins properly before pressing it in.</p>
->
+    <div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <video controls style="width:100%; border-radius:16px; box-shadow:0 0 25px rgba(255,107,129,0.25);">
+        <source src="stacking.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+ </div>
+
+<div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <img src="stacking.png" alt="">
+</div>
 
     <h3>🧴 Step 3: Skin Preparation</h3>
     <p>Apply NuPrep gel → rub gently → wipe clean.</p>
+<div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <video controls style="width:100%; border-radius:16px; box-shadow:0 0 25px rgba(255,107,129,0.25);">
+        <source src="skin prep.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
+ </div>
     <h3>🔌 Step 4: Connecting Electrode Cable</h3>
     <p>Connect the BioAmp cable exactly as shown — do NOT put electrodes yet.</p>
+<div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <video controls style="width:100%; border-radius:16px; box-shadow:0 0 25px rgba(255,107,129,0.25);">
+        <source src="connecting electrode.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
+ </div>
     <h3>📍 Step 5: Electrode Placement</h3>
-
-    <p><b>Option 1: Gel Electrodes</b></p>
-    <ul>
-        <li>Connect BioAmp Cable → gel electrodes</li>
-        <li>Place IN+/IN− near ulnar nerve</li>
-        <li>REF electrode on back of hand</li>
-    </ul>
-
-    <p><b>Option 2: EMG BioAmp Band</b></p>
+    <p>Place electrodes on forearm as shown below:</p>  
+    <p><b>Using  EMG BioAmp Band</b></p>
     <ul>
         <li>IN+/IN− positioned on ulnar nerve</li>
         <li>REF on opposite side</li>
         <li>Add small drops of electrode gel</li>
     </ul>
+    <div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <video controls style="width:100%; border-radius:16px; box-shadow:0 0 25px rgba(255,107,129,0.25);">
+        <source src="electrode placements.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+ </div>
 
     <h3>🦾 Step 6: Connect Servo Claw</h3>
     <p>
         Plug the servo claw into the BioAmp Shield ports.  
         Servo moves automatically based on muscle activation.
     </p>
+<div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <video controls style="width:100%; border-radius:16px; box-shadow:0 0 25px rgba(255,107,129,0.25);">
+        <source src="connecting servo claw.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
+ </div>
     <h3>🧠 Step 7 — Upload the EMG → Servo Control Code</h3>
     <p>Paste the following code into Arduino IDE and upload:</p>
 
@@ -371,6 +401,14 @@ float EMGFilter(float input)
         Stronger flex = higher EMG = faster servo movement.
     </p>
 
+    <div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <video controls style="width:100%; border-radius:16px; box-shadow:0 0 25px rgba(255,107,129,0.25);">
+        <source src="finalworking.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+ </div>
+
 </div>
 
 <!-- ===================== STEP 7 ===================== -->
@@ -449,7 +487,7 @@ float EMGFilter(float input)
     <div class="code-box">
         <button class="copy-btn" onclick="copyCode(this)">Copy</button>
 <pre><code>
-    #include &lt;arduinoFFT.h&gt;
+#include &lt;arduinoFFT.h&gt;
 
 // ================= EEG + FFT Config =====================
 #define SAMPLE_RATE 512
@@ -488,7 +526,7 @@ SmoothedBandpower smoothedPowers;
 // ================= FFT Buffers ==========================
 double vReal[FFT_SIZE];
 double vImag[FFT_SIZE];
-ArduinoFFT<double> FFT(vReal, vImag, FFT_SIZE, SAMPLE_RATE);
+ArduinoFFT&lt;double&gt; FFT(vReal, vImag, FFT_SIZE, SAMPLE_RATE);
 
 // ================= Timing ================================
 unsigned long lastEmotionTime = 0;
@@ -496,27 +534,27 @@ unsigned long sampling_period_us;
 
 // ================= Functions =============================
 void smoothBandpower(BandpowerResults *raw, SmoothedBandpower *s) {
-  s->delta = SMOOTHING_FACTOR * raw->delta + (1 - SMOOTHING_FACTOR) * s->delta;
-  s->theta = SMOOTHING_FACTOR * raw->theta + (1 - SMOOTHING_FACTOR) * s->theta;
-  s->alpha = SMOOTHING_FACTOR * raw->alpha + (1 - SMOOTHING_FACTOR) * s->alpha;
-  s->beta  = SMOOTHING_FACTOR * raw->beta  + (1 - SMOOTHING_FACTOR) * s->beta;
-  s->gamma = SMOOTHING_FACTOR * raw->gamma + (1 - SMOOTHING_FACTOR) * s->gamma;
-  s->total = SMOOTHING_FACTOR * raw->total + (1 - SMOOTHING_FACTOR) * s->total;
+  s-&gt;delta = SMOOTHING_FACTOR * raw-&gt;delta + (1 - SMOOTHING_FACTOR) * s-&gt;delta;
+  s-&gt;theta = SMOOTHING_FACTOR * raw-&gt;theta + (1 - SMOOTHING_FACTOR) * s-&gt;theta;
+  s-&gt;alpha = SMOOTHING_FACTOR * raw-&gt;alpha + (1 - SMOOTHING_FACTOR) * s-&gt;alpha;
+  s-&gt;beta  = SMOOTHING_FACTOR * raw-&gt;beta  + (1 - SMOOTHING_FACTOR) * s-&gt;beta;
+  s-&gt;gamma = SMOOTHING_FACTOR * raw-&gt;gamma + (1 - SMOOTHING_FACTOR) * s-&gt;gamma;
+  s-&gt;total = SMOOTHING_FACTOR * raw-&gt;total + (1 - SMOOTHING_FACTOR) * s-&gt;total;
 }
 
 BandpowerResults calculateBandpower(double *powerSpectrum, double binWidth) {
   BandpowerResults results = {0};
 
-  for (int i = 1; i < FFT_SIZE / 2; i++) {
+  for (int i = 1; i &lt; FFT_SIZE / 2; i++) {
     float freq = i * binWidth;
     float power = powerSpectrum[i];
     results.total += power;
 
-    if (freq >= DELTA_LOW && freq < DELTA_HIGH) results.delta += power;
-    else if (freq >= THETA_LOW && freq < THETA_HIGH) results.theta += power;
-    else if (freq >= ALPHA_LOW && freq < ALPHA_HIGH) results.alpha += power;
-    else if (freq >= BETA_LOW  && freq < BETA_HIGH)  results.beta  += power;
-    else if (freq >= GAMMA_LOW && freq < GAMMA_HIGH) results.gamma += power;
+    if (freq &gt;= DELTA_LOW &amp;&amp; freq &lt; DELTA_HIGH) results.delta += power;
+    else if (freq &gt;= THETA_LOW &amp;&amp; freq &lt; THETA_HIGH) results.theta += power;
+    else if (freq &gt;= ALPHA_LOW &amp;&amp; freq &lt; ALPHA_HIGH) results.alpha += power;
+    else if (freq &gt;= BETA_LOW  &amp;&amp; freq &lt; BETA_HIGH)  results.beta  += power;
+    else if (freq &gt;= GAMMA_LOW &amp;&amp; freq &lt; GAMMA_HIGH) results.gamma += power;
   }
   return results;
 }
@@ -531,23 +569,22 @@ void printEmotion() {
 
   String emotion = "Neutral";
 
-  // Very low signal → no contact
-  if (smoothedPowers.total < 0.001) {
+  if (smoothedPowers.total &lt; 0.001) {
     emotion = "No Signal";
   }
-  else if (d > 60 && b < 10 && g < 10) {
+  else if (d &gt; 60 &amp;&amp; b &lt; 10 &amp;&amp; g &lt; 10) {
     emotion = "Drowsy";
   }
-  else if (t > a && t > b && t > 15) {
+  else if (t &gt; a &amp;&amp; t &gt; b &amp;&amp; t &gt; 15) {
     emotion = "Daydreaming";
   }
-  else if (b > 25 && b > a) {
+  else if (b &gt; 25 &amp;&amp; b &gt; a) {
     emotion = "Focused";
   }
-  else if (a > 25 && a > b) {
+  else if (a &gt; 25 &amp;&amp; a &gt; b) {
     emotion = "Calm";
   }
-  else if (g > 15) {
+  else if (g &gt; 15) {
     emotion = "Hyper-aware";
   }
 
@@ -575,11 +612,11 @@ void loop() {
   unsigned long microseconds;
 
   // Sampling
-  for (int i = 0; i < FFT_SIZE; i++) {
+  for (int i = 0; i &lt; FFT_SIZE; i++) {
     microseconds = micros();
     vReal[i] = analogRead(INPUT_PIN);
     vImag[i] = 0;
-    while (micros() - microseconds < sampling_period_us);
+    while (micros() - microseconds &lt; sampling_period_us);
   }
 
   // FFT Processing
@@ -592,18 +629,14 @@ void loop() {
   BandpowerResults raw = calculateBandpower(vReal, binWidth);
   smoothBandpower(&raw, &smoothedPowers);
 
-  // LED = "Focus indicator" (simple)
   double b_pct = (smoothedPowers.beta / (smoothedPowers.total + EPSILON)) * 100;
-  digitalWrite(LED_PIN, (b_pct > 20.0 ? HIGH : LOW));
+  digitalWrite(LED_PIN, (b_pct &gt; 20.0 ? HIGH : LOW));
 
-  // Print emotion every 5 sec
-  if (millis() - lastEmotionTime > 5000) {
+  if (millis() - lastEmotionTime &gt; 5000) {
     printEmotion();
     lastEmotionTime = millis();
   }
 }
-   
-
 </code></pre>
     </div>
 
@@ -681,11 +714,19 @@ Delta: 10.2 | Theta: 8.4 | Alpha: 14.1 | Beta: 29.5 | Gamma: 3.0
 
     <h3>🧪 Step 1: Stack Muscle BioAmp Shield on Arduino Uno</h3>
     <p>Carefully align the pins and stack the <b>Muscle BioAmp Shield</b> on top of Arduino Uno.</p>
+ <div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <video controls style="width:100%; border-radius:16px; box-shadow:0 0 25px rgba(255,107,129,0.25);">
+        <source src="stacking.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
+ </div>
 
-    <h3>🧪 Step 1: Stack Muscle BioAmp Shield</h3>
-    <p>Align all pins properly before pressing the Shield into the Arduino.</p>
+<div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <img src="stacking.png" alt="">
+</div>
 
+    <h3>🧪 Step 2: Connecting BioAmp EXG Pill</h3>
     <img src="https://content.instructables.com/FUW/57PB/LY4F6XOC/FUW57PBLY4F6XOC.png"
          alt="Stacking example 1">
     <img src="https://content.instructables.com/F7P/NORA/LY4F6XO1/F7PNORALY4F6XO1.png"
@@ -695,12 +736,26 @@ Delta: 10.2 | Theta: 8.4 | Alpha: 14.1 | Beta: 29.5 | Gamma: 3.0
 
     <h3>🔌 Step 3: Connecting Electrode Cable</h3>
     <p>Plug the BioAmp Cable into the EXG Pill exactly as shown.</p>
+ <div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <video controls style="width:100%; border-radius:16px; box-shadow:0 0 25px rgba(255,107,129,0.25);">
+        <source src="connectingelectrode22.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+ </div>
 
     <h3>🧴 Step 4: Skin Preparation</h3>
     <p>
         Apply <b>NuPrep Gel</b> → rub gently → clean with wet wipe.  
         This reduces skin impedance and improves EOG signal quality.
     </p>
+ <div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <video controls style="width:100%; border-radius:16px; box-shadow:0 0 25px rgba(255,107,129,0.25);">
+        <source src="skinprep2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+ </div>
 
     <p><b>About NuPrep:</b> Removes dry skin and improves conductivity.</p>
 
@@ -713,30 +768,21 @@ Delta: 10.2 | Theta: 8.4 | Alpha: 14.1 | Beta: 29.5 | Gamma: 3.0
         <li>REF → Behind the earlobe</li>
     </ul>
 
-    <h3>💻 Step 6: Download Arduino IDE</h3>
-    <p>
-        Download from:  
-        <a href="https://www.arduino.cc/en/software" target="_blank">https://www.arduino.cc/en/software</a>
-    </p>
-    <p>Install <b>Arduino IDE 1.8.19</b> for best signal performance.</p>
+<div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <img src="1.jpg" alt="">
+</div>
 
-    <h3>⌨️ Step 7: Coding Time!</h3>
-    <p>Open <code>6_EOGDinoGame.ino</code> → Select COM port → Upload.</p>
 
-    <h3>🧠 Step 7 Code: EOG Dino Game Controller</h3>
+<div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <img src="2.jpg" alt="">
+</div>
+
+    <h3>🧠 Step 6 Code: EOG Dino Game Controller</h3>
 
     <div class="code-box">
         <button class="copy-btn" onclick="copyCode(this)">Copy</button>
 <pre><code>
-   
-// This code is designed to work specifically on:
-// 1. Arduino UNO R4 Minima
-// 2. Arduino UNO R4 WiFi
 
-// EOG Dino Game Controller using Single Blink Detection
-// Single Blink = Space Bar (Jump/Action)
-// Perfect for Chrome Dino Game, Flappy Bird, or any space-triggered games
-// Adapted from Slide-Control.ino with simplified single blink detection
 
 #include &lt;Arduino.h&gt;
 #include &lt;Keyboard.h&gt;  // HID keyboard library for Arduino R4
@@ -879,7 +925,7 @@ void setup() {
   Keyboard.begin();
   
   // LED startup sequence - game ready indicator
-  for(int i = 0; i < 3; i++) {
+  for(int i = 0; i &lt; 3; i++) {
     digitalWrite(LED_PIN, HIGH);
     delay(200);
     digitalWrite(LED_PIN, LOW);
@@ -918,20 +964,20 @@ void loop() {
     
     timer -= interval;
     const long period = 1000000L / SAMPLE_RATE;
-    while (timer < 0) {
+    while (timer &lt; 0) {
         timer += period;
         int raw = analogRead(INPUT_PIN);
         float filtered = Notch(raw);
         float eog = EOGFilter(filtered);
         eogCircBuffer[writeIndex] = eog;
         writeIndex = (writeIndex + 1) % BUFFER_SIZE;
-        if (samplesAvailable < BUFFER_SIZE) {
+        if (samplesAvailable &lt; BUFFER_SIZE) {
             samplesAvailable++;
         }
     }
     
     // Process all available samples from circular buffer
-    while (samplesAvailable > 0) {
+    while (samplesAvailable &gt; 0) {
         float eog = eogCircBuffer[readIndex];
         readIndex = (readIndex + 1) % BUFFER_SIZE;
         samplesAvailable--;
@@ -940,7 +986,7 @@ void loop() {
         currentEOGEnvelope = updateEOGEnvelope(eog);
         
         // Add to segment buffer for statistics
-        if(segmentIndex < SAMPLES_PER_SEGMENT) {
+        if(segmentIndex &lt; SAMPLES_PER_SEGMENT) {
             eogBuffer[segmentIndex] = currentEOGEnvelope;
             segmentIndex++;
         }
@@ -950,19 +996,19 @@ void loop() {
     unsigned long nowMs = millis();
     
     // ===== SEGMENT STATISTICS PROCESSING =====
-    if ((nowMs - lastSegmentTimeMs) >= (1000UL * SEGMENT_SEC)) {
-        if(segmentIndex > 0) {
+    if ((nowMs - lastSegmentTimeMs) &gt;= (1000UL * SEGMENT_SEC)) {
+        if(segmentIndex &gt; 0) {
             // Compute min/max/avg for the completed segment
             eogMin = eogBuffer[0]; 
             eogMax = eogBuffer[0];  
             float eogSum = 0;
             
-            for (uint16_t i = 0; i < segmentIndex; i++) {
+            for (uint16_t i = 0; i &lt; segmentIndex; i++) {
                 float eogVal = eogBuffer[i];
                 
                 // EOG statistics
-                if (eogVal < eogMin) eogMin = eogVal;
-                if (eogVal > eogMax) eogMax = eogVal;
+                if (eogVal &lt; eogMin) eogMin = eogVal;
+                if (eogVal &gt; eogMax) eogMax = eogVal;
                 eogSum += eogVal;
             }
             
@@ -975,9 +1021,9 @@ void loop() {
     }
     
     // ===== SINGLE BLINK DETECTION AND SPACE BAR CONTROL =====
-    if (currentEOGEnvelope > BlinkLowerThreshold && 
-        currentEOGEnvelope < BlinkUpperThreshold && 
-        (nowMs - lastBlinkTime) >= BLINK_DEBOUNCE_MS) {
+    if (currentEOGEnvelope &gt; BlinkLowerThreshold && 
+        currentEOGEnvelope &lt; BlinkUpperThreshold && 
+        (nowMs - lastBlinkTime) &gt;= BLINK_DEBOUNCE_MS) {
         
         lastBlinkTime = nowMs;
         
@@ -991,7 +1037,7 @@ void loop() {
     
     // ===== PERIODIC STATUS UPDATES =====
     static unsigned long lastStatusUpdate = 0;
-    if ((nowMs - lastStatusUpdate) >= 30000) {  // Every 30 seconds
+    if ((nowMs - lastStatusUpdate) &gt;= 30000) {  // Every 30 seconds
         unsigned long gameTimeSeconds = (nowMs - gameStartTime) / 1000;
         float blinksPerMinute = (totalBlinks * 60.0) / (gameTimeSeconds + 1);
         
@@ -1016,7 +1062,7 @@ void loop() {
     // ===== REAL-TIME EOG MONITORING (DEBUG) =====
     #ifdef DEBUG
     static unsigned long lastDebugPrint = 0;
-    if ((nowMs - lastDebugPrint) >= 1000) {  // Every 1 second
+    if ((nowMs - lastDebugPrint) &gt;= 1000) {  // Every 1 second
         if (segmentStatsReady) {
             Serial.print("EOG: (Avg: "); Serial.print(eogAvg);
             Serial.print(", Min: "); Serial.print(eogMin);
@@ -1045,7 +1091,10 @@ void loop() {
 
     <ul>
         <li>Open Google Chrome</li>
-        <li>Visit <code>chrome://dino/</code></li>
+         <li>visit</li>
+        <div class="code-box">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+         <pre><code>chrome://dino/</code></pre></div>
         <li>Press Space once to start</li>
         <li>Blink → Dino Jumps!</li>
     </ul>
@@ -1053,6 +1102,13 @@ void loop() {
     <p style="font-weight:600; color:#ff8fa3;">
         Stronger blinks = higher accuracy 😎👁️🦖
     </p>
+ <div class="soft-glow-img" style="max-width:600px; margin:35px auto;">
+    <video controls style="width:100%; border-radius:16px; box-shadow:0 0 25px rgba(255,107,129,0.25);">
+        <source src="dinogame.mp4" type="video/mp4">
+       
+    </video>
+
+ </div>
 
     
 </div>
