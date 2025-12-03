@@ -395,6 +395,13 @@ float EMGFilter(float input)
 </code></pre>
     </div>
 
+    <!-- Warning Notice -->
+<div style="background:linear-gradient(135deg,#7f1d1d,#991b1b); border-left:8px solid #ef4444; padding:20px 26px; border-radius:12px; margin:1.5em 0; color:#fee2e2; box-shadow:0 4px 18px rgba(0,0,0,0.3);">
+  <strong style="font-size:17px; display:block; margin-bottom:10px;">⚠️ Important Notice</strong>
+  <p>Keep laptop unplugged and remove the charger .</p>
+</div>
+
+
     <h3>🦾 Step 9 — Control the Servo Claw</h3>
     <p>
         Flex your muscles → envelope rises → servo toggles.  
@@ -445,7 +452,7 @@ float EMGFilter(float input)
     </ul>
 
     <h3>🔌 Circuit Diagram</h3>
-    <img src="https://content.instructables.com/F15/XHD3/M98IG675/F15XHD3M98IG675.png" alt="Circuit diagram showing EEG setup">
+    <img src="random1.jpg" alt="Circuit diagram showing EEG setup">
 
     <h3>🧪 Step 1: Upload the EEG Emotion Detection Program</h3>
 <h3 style="color:#ff8fa3; text-align:left; margin-top:30px;">📍 Electrode Placement</h3>
@@ -493,7 +500,7 @@ float EMGFilter(float input)
 #define SAMPLE_RATE 512
 #define FFT_SIZE 256
 #define BAUD_RATE 115200
-#define INPUT_PIN A0
+#define INPUT_PIN A2
 #define LED_PIN 2
 
 // ================= Frequency Bands ======================
@@ -727,9 +734,8 @@ Delta: 10.2 | Theta: 8.4 | Alpha: 14.1 | Beta: 29.5 | Gamma: 3.0
 </div>
 
     <h3>🧪 Step 2: Connecting BioAmp EXG Pill</h3>
-    <img src="https://content.instructables.com/FUW/57PB/LY4F6XOC/FUW57PBLY4F6XOC.png"
-         alt="Stacking example 1">
-    <img src="https://content.instructables.com/F7P/NORA/LY4F6XO1/F7PNORALY4F6XO1.png"
+  
+    <img src="random1.jpg"
          alt="Stacking example 2">
 
     <p>Connect the <b>BioAmp EXG Pill</b> to the <b>A2 port</b> using the STEMMA cable.</p>
@@ -1076,8 +1082,14 @@ void loop() {
 }
 </code></pre>
     </div>
+<!-- Warning Notice -->
+<div style="background:linear-gradient(135deg,#7f1d1d,#991b1b); border-left:8px solid #ef4444; padding:20px 26px; border-radius:12px; margin:1.5em 0; color:#fee2e2; box-shadow:0 4px 18px rgba(0,0,0,0.3);">
+  <strong style="font-size:17px; display:block; margin-bottom:10px;">⚠️ Important Notice</strong>
+  <p>Keep laptop unplugged and remove the charger.</p>
+</div>
 
-    <p><b>IMPORTANT:</b> Keep laptop unplugged and stay ~5m away from AC appliances.</p>
+
+
 
     <h3>📊 Step 8: Testing the Connections</h3>
     <p>
@@ -1131,3 +1143,7 @@ function copyCode(btn) {
         });
 }
 </script>
+
+
+
+
